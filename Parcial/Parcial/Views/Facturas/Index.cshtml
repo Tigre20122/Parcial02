@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Parcial.Models.Factura>
+
+@{
+    ViewData["Title"] = "Factura";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Nuevo">Nueva Factura</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+            </td>
+            <td>
+                <a asp-action="Editar" asp-route-id="@item.IdFactura" class="btn btn-success">Editar</a> |
+                <a asp-action="Mostrar" asp-route-id="@item.IdFactura" class="btn btn-info">Mostrar</a> |
+                <a asp-action="Eliminar" asp-route-id="@item.IdFactura" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

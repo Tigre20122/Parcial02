@@ -1,0 +1,60 @@
+﻿@model Parcial.Models.Provedor
+
+@{
+    ViewData["Title"] = "Mostrar";
+}
+
+<h2>Mostrar</h2>
+
+<div>
+    <h4>Provedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ruc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ruc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Extencion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Extencion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CelularContacto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CelularContacto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreContacto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreContacto)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Editar" asp-route-id="@Model.IdProvedor">Editar</a> |
+    <a asp-action="Index">Regresar al Listado</a>
+</div>

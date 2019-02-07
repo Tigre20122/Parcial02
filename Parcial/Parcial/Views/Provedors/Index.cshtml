@@ -1,0 +1,174 @@
+﻿@model Paginacion<Parcial.Models.Provedor>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Proveedores</h2>
+
+<p>
+    <a asp-action="Nuevo">Agregar Nuevo Proveedor</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Filtro: <input type="text" name="searchString" value="@ViewData["CurrenFilter"]" />
+            <input type="submit" value="Buscar" class="btn btn-default" />
+            <a asp-action="Index">Todos los Registros</a>| Registros mostrados @Model.TotalR
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ruc
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentFilter"]">Nombre</a>
+            </th>
+            <th>
+                Direcciòn
+            </th>
+            <th>
+                Telefono
+            </th>
+            <th>
+                Extenciòn
+            </th>
+            <th>
+                Celular Contacto
+            </th>
+            <th>
+                Nombre Contacto
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ruc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Extencion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CelularContacto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreContacto)
+                </td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@item.IdProvedor" class="btn btn-success">Editar</a> |
+                    <a data-toggle="modal" data-target="#myModal" class="btn btn-info" onclick="getDataAjax('@item.IdProvedor','Provedors/MostrarAjax')">Mostrar</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.IdProvedor" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Mostrar</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Editar">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" name="IdProvedor" id="IdProvedor" for="IdProvedor" />
+                    <div class="form-group">
+                        <label for="Ruc" class="control-label">RUC</label>
+                        <input for="Ruc" name="Ruc" id="Ruc" class="form-control" disabled />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Nombre" class="control-label">Nombre</label>
+                        <input for="Nombre" name="Nombre" id="Nombre"disabled class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Direccion" class="control-label">Direccion</label>
+                        <input for="Direccion" name="Direccion" id="Direccion"disabled class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono" class="control-label">Telefono</label>
+                        <input for="Telefono" name="Telefono" id="Telefono" disabled class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Extencion" class="control-label">Extencion</label>
+                        <input for="Extencion" name="Extencion" id="Extencion" disabled class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="CelularContacto" class="control-label">CelularContacto</label>
+                        <input for="CelularContacto" name="CelularContacto" id="CelularContacto" disabled class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="NombreContacto" class="control-label">NombreContacto</label>
+                        <input for="NombreContacto" name="NombreContacto" id="NombreContacto" disabled class="form-control" />
+
+                    </div>
+                    <!-- <div class="form-group">
+         <input type="submit" value="Actualizar" class="btn btn-default" />
+     </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Anterior
+</a>
+
+@for (int i = 1; i <= Model.TotalPages; i++)
+{
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-page="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        @i
+    </a>
+}
+
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-page="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Siguiente
+</a>

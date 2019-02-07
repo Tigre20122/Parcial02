@@ -1,0 +1,60 @@
+﻿@model Parcial.Models.Producto
+
+@{
+    ViewData["Title"] = "Mostrar";
+}
+
+<h2>Mostrar</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioUnitario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecioUnitario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioPublico)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecioPublico)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFabricacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaFabricacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCaducaion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaCaducaion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Iva)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Iva)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Provedor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Provedor.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Editar" asp-route-id="@Model.IdProducto">Editar</a> |
+    <a asp-action="Index">Regresar al Listado</a>
+</div>
